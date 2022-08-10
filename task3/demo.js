@@ -10,6 +10,7 @@ document.title = "docs";
 //chaning title of page
 var h2 = document.getElementById('title');
 h2.style.color = 'green';
+h2.style.fontWeight='bold';
 
 document.getElementById('header-title').textContent = 'Hello';
 //document.all is not supported
