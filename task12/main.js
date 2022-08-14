@@ -18,8 +18,9 @@ document.getElementById('my-form').addEventListener('submit', function (e) {
     email: usermail,
   };
   userList.push(userDetail);
+  
   localStorage.setItem('userList', JSON.stringify(userList));
-
+  
   var fetchObj = JSON.parse(
     localStorage.getItem('userList', JSON.stringify(userList))
   );
