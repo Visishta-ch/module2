@@ -14,9 +14,11 @@ document.getElementById('my-form').addEventListener('submit', function (e) {
 
   /*network call */
 
+  
+
   axios.post('https://crudcrud.com/api/74fa26933a4f410484867e284af277d4/bookingsData',userDetail)
         .then((response) => {
-          displayList(response.user); /*displaying the user details onto screen */
+          displayList(response.data); /*displaying the user details onto screen */
           console.log(response);
         })
         .catch((err) => console.log(err));
@@ -25,11 +27,20 @@ document.getElementById('my-form').addEventListener('submit', function (e) {
   document.getElementById('name').focus();
 });
 window.addEventListener('DOMContentLoaded', (event) => {
-    event.preventDefault();
-    Object.keys(localStorage).forEach((key) => {
-      const user = JSON.parse(localStorage.getItem(key));
-      displayList(user);
-    });
+
+    axios.get("https://crudcrud.com/api/74fa26933a4f410484867e284af277d4/bookingsData")
+        .then((response) => {
+            console.log(response);
+            for(var i=0;i<response.data.length;i++){
+                displayList(response.data[i]);
+            }
+        })
+        .catch((err) => console.log(err));
+    // event.preventDefault();
+    // Object.keys(localStorage).forEach((key) => {
+    //   const user = JSON.parse(localStorage.getItem(key));
+    //   displayList(user);
+    // });
   });
 
 function displayList(user) {
@@ -55,6 +66,8 @@ function editUserDetails( name, emailId){
     deleteUser(name)
  }
  function deleteUser(name){
+
+    
     console.log(name)
     localStorage.removeItem(name);
     removeUserFromScreen(name);
