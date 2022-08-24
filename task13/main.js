@@ -16,6 +16,14 @@ document.getElementById('my-form').addEventListener('submit', function (e) {
 
   localStorage.setItem(userDetail.name, JSON.stringify(userDetail));
 
+  /*network call */
+
+  // axios.post('https://crudcrud.com/api/74fa26933a4f410484867e284af277d4/bookingsData',userDetail)
+  //       .then((response) => {
+  //         displayList(response.data);
+  //         console.log(response);
+  //       })
+  //       .catch((err) => console.log(err));
   displayList(userDetail);
   document.getElementById('my-form').reset();
   document.getElementById('name').focus();
