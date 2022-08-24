@@ -16,19 +16,19 @@ document.getElementById('my-form').addEventListener('submit', function (e) {
 
   
 
-  axios.post('https://crudcrud.com/api/74fa26933a4f410484867e284af277d4/bookingsData',userDetail)
+  axios.post('https://crudcrud.com/api/1632105e7d2b4934b28257789fabe071/bookingDetails',userDetail)
         .then((response) => {
           displayList(response.data); /*displaying the user details onto screen */
           console.log(response);
         })
         .catch((err) => console.log(err));
-  displayList(userDetail);
+//   displayList(userDetail);
   document.getElementById('my-form').reset();
   document.getElementById('name').focus();
 });
 window.addEventListener('DOMContentLoaded', (event) => {
 
-    axios.get("https://crudcrud.com/api/74fa26933a4f410484867e284af277d4/bookingsData")
+    axios.get("https://crudcrud.com/api/1632105e7d2b4934b28257789fabe071/bookingDetails")
         .then((response) => {
             console.log(response);
             for(var i=0;i<response.data.length;i++){
@@ -52,8 +52,8 @@ function displayList(user) {
     }
 
     const parentNode = document.getElementById('users');
-    const childHTML = `<li id=${user.name}> ${user.name} - ${user.email}
-                            <button onclick=deleteUser('${user.name}')> Delete User </button>
+    const childHTML = `<li id=${user._id}> ${user.name} - ${user.email}
+                            <button onclick=deleteUser('${user._id}')> Delete User </button> 
                             <button onclick=editUserDetails('${user.name}','${user.email}')>Edit User </button>
                          </li>`
 
@@ -65,12 +65,15 @@ function editUserDetails( name, emailId){
     document.getElementById('email').value = emailId;
     deleteUser(name)
  }
- function deleteUser(name){
+ function deleteUser(user_id){
 
-    
-    console.log(name)
-    localStorage.removeItem(name);
-    removeUserFromScreen(name);
+    axios.delete(`https://crudcrud.com/api/1632105e7d2b4934b28257789fabe071/bookingDetails/${user_id}`)
+        .then((response) => console.log("User deleted succefully"+ response))
+        .catch((error) => console.log(error))
+        removeUserFromScreen(user_id);
+    // console.log(name)
+    // localStorage.removeItem(name);
+    // removeUserFromScreen(name);
 
 }
 function removeUserFromScreen(name){
